@@ -14,7 +14,7 @@ const ProfilePicture = ({ image, updateVisibility }) => {
     );
 }
 
-const ModalSetName = ({ visible, updateVisibility, updateName}) => {
+const ModalSetName = ({ visible, updateVisibility, updateName, updatePicture }) => {
     var textInput = ""
     console.log("Modal Executed")
     return (
@@ -42,7 +42,8 @@ const ModalSetName = ({ visible, updateVisibility, updateName}) => {
                         <Button title="Cancel" onPress={() => updateVisibility(false)} />   
                         <Button title="Submit" onPress={() => {
                             updateVisibility(false)
-                            textInput == "" ? updateName("Guest") : updateName(textInput) 
+                            textInput == "" ? updateName("Guest") : updateName(textInput)
+                            textInput == "" ? updatePicture(require('./assets/adaptive-icon.png')) : updatePicture(require('./assets/profile.jpeg'))
                             }} />
                     </View>
                 </View>
@@ -53,7 +54,7 @@ const ModalSetName = ({ visible, updateVisibility, updateName}) => {
 }
 
 export function Profile({ profileImage }) {
-    const [profilePic, setProfile] = useState(require('./assets/adaptive-icon.png'))
+    const [profilePic, setProfilePic] = useState(require('./assets/adaptive-icon.png'))
     const [hasName, setHasName] = useState(false)
     const [name, setName] = useState("Guest")
     const [isVisible, setIsVisible] = useState(false)
@@ -66,7 +67,8 @@ export function Profile({ profileImage }) {
                 visible={isVisible} 
                 updateVisibility={setIsVisible} 
                 updateName={setName} 
-                updateHasName={setHasName} />
+                updateHasName={setHasName}
+                updatePicture={setProfilePic} />
         </View>
     );
 }
